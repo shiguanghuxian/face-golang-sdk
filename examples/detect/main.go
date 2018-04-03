@@ -1,21 +1,25 @@
-# face-golang-sdk
+package main
 
-face++????sdk?????????????
+import (
+	"encoding/json"
+	"log"
 
-????? `examples` ??
+	sdk "github.com/shiguanghuxian/face-golang-sdk"
+)
 
-???????????? [https://github.com/shiguanghuxian/face-login](https://github.com/shiguanghuxian/face-login)
+var (
+	APIKey    = ""
+	APISecret = ""
+)
 
-??:
-
-```
-	// ????sdk??
+func main() {
+	// 创建一个sdk对象
 	faceSDK, err := sdk.NewFaceSDK(APIKey, APISecret)
 	log.Println(err)
-	// ????????api????
+	// 创建一个人脸检测api调用对象
 	detect, err := faceSDK.Detect()
 	log.Println(err)
-	// ????
+	// 设置参数
 	dr, body, err := detect.SetImage("./demo.jpg", "image_file").
 		SetOption("return_attributes", "gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus").
 		SetOption("return_landmark", 1).
@@ -25,5 +29,5 @@ face++????sdk?????????????
 	log.Println(body)
 	js, _ := json.Marshal(dr)
 	log.Println(string(js))
-	log.Println("?????", dr.Faces[0].Attributes.Age.Value)
-```
+	log.Println("预测年龄：", dr.Faces[0].Attributes.Age.Value)
+}
