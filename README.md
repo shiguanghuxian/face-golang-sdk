@@ -1,21 +1,21 @@
 # face-golang-sdk
 
-face++????sdk?????????????
+face++的golang版 sdk
 
-????? `examples` ??
+示例清参考 `examples` 文件夹
 
-???????????? [https://github.com/shiguanghuxian/face-login](https://github.com/shiguanghuxian/face-login)
+也可以参考小程序人脸登录服务端[https://github.com/shiguanghuxian/face-login](https://github.com/shiguanghuxian/face-login)
 
-??:
+示例:
 
 ```
-	// ????sdk??
+	// 创建一个sdk对象
 	faceSDK, err := sdk.NewFaceSDK(APIKey, APISecret)
 	log.Println(err)
-	// ????????api????
+	// 创建人脸检测对象
 	detect, err := faceSDK.Detect()
 	log.Println(err)
-	// ????
+	// 设置参数
 	dr, body, err := detect.SetImage("./demo.jpg", "image_file").
 		SetOption("return_attributes", "gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus").
 		SetOption("return_landmark", 1).
@@ -25,5 +25,5 @@ face++????sdk?????????????
 	log.Println(body)
 	js, _ := json.Marshal(dr)
 	log.Println(string(js))
-	log.Println("?????", dr.Faces[0].Attributes.Age.Value)
+	log.Println("年龄：", dr.Faces[0].Attributes.Age.Value)
 ```
